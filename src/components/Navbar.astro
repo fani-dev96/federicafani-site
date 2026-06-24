@@ -1,0 +1,339 @@
+---
+const { lang = 'it' } = Astro.props;
+
+const nav = {
+  it: {
+    chiSono: 'Chi sono',
+    servizi: 'Servizi',
+    formazione: 'Formazione',
+    galleria: 'Galleria',
+    portfolio: 'Portfolio',
+    contatti: 'Contattami',
+    storia: 'La mia storia',
+    hobby: 'Hobby e passioni',
+    smm: 'Social media',
+    app: 'App & SaaS',
+    privacy: 'Data privacy',
+    pm: 'Project management',
+    cert: 'Certificazioni',
+    lauree: 'Lauree',
+  },
+  en: {
+    chiSono: 'About',
+    servizi: 'Services',
+    formazione: 'Education',
+    galleria: 'Gallery',
+    portfolio: 'Portfolio',
+    contatti: 'Contact',
+    storia: 'My story',
+    hobby: 'Hobbies & passions',
+    smm: 'Social media',
+    app: 'App & SaaS',
+    privacy: 'Data privacy',
+    pm: 'Project management',
+    cert: 'Certifications',
+    lauree: 'Degrees',
+  },
+  es: {
+    chiSono: 'Sobre mí',
+    servizi: 'Servicios',
+    formazione: 'Formación',
+    galleria: 'Galería',
+    portfolio: 'Portfolio',
+    contatti: 'Contacto',
+    storia: 'Mi historia',
+    hobby: 'Aficiones y pasiones',
+    smm: 'Redes sociales',
+    app: 'App & SaaS',
+    privacy: 'Privacidad digital',
+    pm: 'Gestión de proyectos',
+    cert: 'Certificaciones',
+    lauree: 'Titulaciones',
+  }
+};
+
+const t = nav[lang];
+const prefix = lang === 'it' ? '' : `/${lang}`;
+---
+
+<header class="navbar" id="navbar">
+  <div class="navbar-inner">
+    <a href={`${prefix}/`} class="navbar-logo">Federica <span>Fanì</span></a>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav class="nav-links" id="navLinks">
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">{t.chiSono} <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button>
+        <div class="dropdown">
+          <a href={`${prefix}/chi-sono`} class="dd-item">{t.storia}</a>
+          <a href={`${prefix}/chi-sono#hobby`} class="dd-item">{t.hobby}</a>
+        </div>
+      </div>
+
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">{t.servizi} <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button>
+        <div class="dropdown">
+          <a href={`${prefix}/servizi/smm`} class="dd-item">{t.smm}</a>
+          <a href={`${prefix}/servizi/app-dev`} class="dd-item">{t.app}</a>
+          <div class="dd-sep"></div>
+          <a href={`${prefix}/servizi/privacy`} class="dd-item dd-soon">{t.privacy} <span class="soon-tag">Presto</span></a>
+          <a href={`${prefix}/servizi/pm`} class="dd-item dd-soon">{t.pm} <span class="soon-tag">Presto</span></a>
+        </div>
+      </div>
+
+      <div class="nav-item has-dropdown">
+        <button class="nav-link">{t.formazione} <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/></svg></button>
+        <div class="dropdown">
+          <a href={`${prefix}/formazione`} class="dd-item">{t.cert}</a>
+          <a href={`${prefix}/formazione#lauree`} class="dd-item dd-soon">{t.lauree} <span class="soon-tag">Presto</span></a>
+        </div>
+      </div>
+
+      <a href={`${prefix}/galleria`} class="nav-item nav-link">{t.galleria}</a>
+      <a href={`${prefix}/portfolio`} class="nav-item nav-link">{t.portfolio}</a>
+
+      <div class="nav-langs">
+        <a href="/" class={`lang-btn ${lang === 'it' ? 'active' : ''}`}>IT</a>
+        <a href="/en/" class={`lang-btn ${lang === 'en' ? 'active' : ''}`}>EN</a>
+        <a href="/es/" class={`lang-btn ${lang === 'es' ? 'active' : ''}`}>ES</a>
+      </div>
+
+      <a href={`${prefix}/contatti`} class="btn btn-primary nav-cta">{t.contatti}</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(248,249,255,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 0.5px solid rgba(43,79,216,0.12);
+  transition: box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+  box-shadow: 0 2px 24px rgba(10,22,40,0.08);
+}
+
+.navbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 80px);
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.navbar-logo {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--blue-dark);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.navbar-logo span { color: var(--blue); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: nowrap;
+}
+
+.nav-item { position: relative; }
+
+.nav-link {
+  font-size: 13px;
+  color: var(--blue-mid);
+  padding: 8px 12px;
+  border-radius: var(--r-sm);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.2s ease, color 0.2s ease;
+  white-space: nowrap;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-link:hover { background: var(--blue-light); color: var(--blue-dark); }
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  background: var(--white);
+  border: 0.5px solid rgba(43,79,216,0.15);
+  border-radius: var(--r-md);
+  padding: 6px;
+  min-width: 200px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 32px rgba(10,22,40,0.1);
+  z-index: 10;
+}
+
+.has-dropdown:hover .dropdown,
+.has-dropdown:focus-within .dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+.dd-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--blue-mid);
+  transition: background 0.15s ease, color 0.15s ease;
+  gap: 8px;
+}
+
+.dd-item:hover { background: var(--blue-light); color: var(--blue-dark); }
+.dd-item.dd-soon { opacity: 0.6; }
+.dd-sep { height: 0.5px; background: rgba(43,79,216,0.12); margin: 4px 0; }
+
+.soon-tag {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  background: var(--blue-light);
+  color: var(--blue);
+  padding: 2px 6px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.nav-langs {
+  display: flex;
+  gap: 2px;
+  margin: 0 8px;
+}
+
+.lang-btn {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 8px;
+  border-radius: 5px;
+  color: var(--blue-mid);
+  transition: all 0.15s ease;
+}
+
+.lang-btn:hover { color: var(--blue); background: var(--blue-light); }
+.lang-btn.active { background: var(--blue); color: var(--white); }
+
+.nav-cta { margin-left: 8px; font-size: 13px; padding: 9px 20px; }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  border-radius: var(--r-sm);
+}
+
+.bar {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--blue-dark);
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .nav-toggle { display: flex; }
+
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 68px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--white);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px clamp(20px, 5vw, 40px);
+    gap: 4px;
+    overflow-y: auto;
+    z-index: 99;
+  }
+
+  .nav-links.open { display: flex; }
+
+  .nav-item, .nav-item.has-dropdown { width: 100%; }
+  .nav-link { width: 100%; justify-content: space-between; padding: 12px 0; border-radius: 0; border-bottom: 0.5px solid rgba(43,79,216,0.08); }
+  .nav-link:hover { background: transparent; color: var(--blue); }
+
+  .dropdown {
+    position: static;
+    opacity: 1;
+    pointer-events: all;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    padding: 0 0 0 16px;
+    border-radius: 0;
+    display: none;
+  }
+
+  .has-dropdown.open .dropdown { display: block; }
+
+  .dd-item { padding: 10px 0; border-radius: 0; border-bottom: 0.5px solid rgba(43,79,216,0.06); }
+  .dd-item:hover { background: transparent; color: var(--blue); }
+
+  .nav-langs { margin: 16px 0 0; padding-top: 16px; border-top: 0.5px solid rgba(43,79,216,0.12); }
+  .nav-cta { margin: 8px 0 0; width: 100%; justify-content: center; }
+}
+</style>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+
+  window.addEventListener('scroll', () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  toggle?.addEventListener('click', () => {
+    const open = links?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(open));
+  });
+
+  document.querySelectorAll('.has-dropdown .nav-link').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const parent = btn.closest('.has-dropdown');
+      parent?.classList.toggle('open');
+    });
+  });
+
+  document.querySelectorAll('.dd-item').forEach(item => {
+    item.addEventListener('click', () => {
+      links?.classList.remove('open');
+    });
+  });
+</script>
