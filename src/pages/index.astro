@@ -548,7 +548,21 @@ import Layout from '../layouts/Layout.astro';
 /* RESPONSIVE */
 @media (max-width: 1024px) {
   .hero-content { grid-template-columns: 1fr; }
-  .hero-right { display: none; }
+  .hero-right {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-img-wrap {
+    width: 160px;
+    height: 160px;
+  }
+  .hero-img {
+    border-radius: 50%;
+    aspect-ratio: 1;
+  }
+  .hero-deco-circle { display: none; }
+  .hero-badge { display: none; }
   .svc-grid { grid-template-columns: repeat(2, 1fr); }
   .about-grid { grid-template-columns: 1fr; }
 }
