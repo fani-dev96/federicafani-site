@@ -292,9 +292,9 @@ const prefix = lang === 'it' ? '' : `/${lang}`;
     bottom: 0;
     background: var(--white);
     flex-direction: column;
-    align-items: flex-start;
-    padding: 24px clamp(20px, 5vw, 40px);
-    gap: 4px;
+    align-items: stretch;
+    padding: 16px clamp(20px, 5vw, 40px) 32px;
+    gap: 0;
     overflow-y: auto;
     z-index: 99;
   }
@@ -302,7 +302,17 @@ const prefix = lang === 'it' ? '' : `/${lang}`;
   .nav-links.open { display: flex; }
 
   .nav-item, .nav-item.has-dropdown { width: 100%; }
-  .nav-link { width: 100%; justify-content: space-between; padding: 12px 0; border-radius: 0; border-bottom: 0.5px solid rgba(43,79,216,0.08); }
+
+  .nav-link {
+    width: 100%;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-radius: 0;
+    border-bottom: 0.5px solid rgba(43,79,216,0.08);
+    font-size: 15px;
+    color: var(--blue-dark);
+  }
+
   .nav-link:hover { background: transparent; color: var(--blue); }
 
   .dropdown {
@@ -312,18 +322,50 @@ const prefix = lang === 'it' ? '' : `/${lang}`;
     transform: none;
     box-shadow: none;
     border: none;
-    padding: 0 0 0 16px;
     border-radius: 0;
+    padding: 0;
     display: none;
+    background: var(--blue-pale);
+    margin: 0 -clamp(20px, 5vw, 40px);
+    padding: 8px clamp(20px, 5vw, 40px) 8px calc(clamp(20px, 5vw, 40px) + 16px);
   }
 
   .has-dropdown.open .dropdown { display: block; }
 
-  .dd-item { padding: 10px 0; border-radius: 0; border-bottom: 0.5px solid rgba(43,79,216,0.06); }
+  .dd-item {
+    padding: 12px 0;
+    border-radius: 0;
+    border-bottom: 0.5px solid rgba(43,79,216,0.06);
+    font-size: 14px;
+    color: var(--blue-mid);
+  }
+
+  .dd-item:last-child { border-bottom: none; }
   .dd-item:hover { background: transparent; color: var(--blue); }
 
-  .nav-langs { margin: 16px 0 0; padding-top: 16px; border-top: 0.5px solid rgba(43,79,216,0.12); }
-  .nav-cta { margin: 8px 0 0; width: 100%; justify-content: center; }
+  /* Link semplici (Galleria, Portfolio) */
+  .nav-item > .nav-link[href] {
+    color: var(--blue-dark);
+    font-size: 15px;
+  }
+
+  .nav-langs {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0 0;
+    padding-top: 20px;
+    border-top: 0.5px solid rgba(43,79,216,0.12);
+  }
+
+  .lang-btn { font-size: 13px; padding: 6px 12px; }
+
+  .nav-cta {
+    margin: 16px 0 0;
+    width: 100%;
+    justify-content: center;
+    padding: 14px;
+    font-size: 14px;
+  }
 }
 </style>
 
