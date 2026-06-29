@@ -140,11 +140,22 @@ import Layout from '../../layouts/Layout.astro';
         </div>
 
         <div class="app-screens">
-          <div class="screens-scroll">
-            <img src="/images/portfolio/app_magnebevo_home.jpg" alt="Magnebevo App — Home" loading="lazy" class="screen-img" />
-            <img src="/images/portfolio/app_magnebevo_menu.jpg" alt="Magnebevo App — Menu" loading="lazy" class="screen-img" />
-            <img src="/images/portfolio/app_magnebevo_punti.jpg" alt="Magnebevo App — Punti" loading="lazy" class="screen-img" />
-            <img src="/images/portfolio/app_magnebevo_prenota.jpg" alt="Magnebevo App — Prenota" loading="lazy" class="screen-img" />
+          <div class="screens-wrap">
+            <button class="screen-prev" aria-label="Precedente">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="screens-scroll">
+              <img src="/images/portfolio/app_magnebevo_home.jpg" alt="Magnebevo App — Home" loading="lazy" class="screen-img" />
+              <img src="/images/portfolio/app_magnebevo_menu.jpg" alt="Magnebevo App — Menu" loading="lazy" class="screen-img" />
+              <img src="/images/portfolio/app_magnebevo_punti.jpg" alt="Magnebevo App — Punti" loading="lazy" class="screen-img" />
+              <img src="/images/portfolio/app_magnebevo_prenota.jpg" alt="Magnebevo App — Prenota" loading="lazy" class="screen-img" />
+              <img src="/images/portfolio/app_magnebevo_promozioni.jpg" alt="Magnebevo App — Promozioni" loading="lazy" class="screen-img" />
+              <img src="/images/portfolio/app_magnebevo_eventi.jpg" alt="Magnebevo App — Eventi" loading="lazy" class="screen-img" />
+              <img src="/images/portfolio/app_magnebevo_chisiamo.jpg" alt="Magnebevo App — Chi Siamo" loading="lazy" class="screen-img" />
+            </div>
+            <button class="screen-next" aria-label="Successivo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -198,6 +209,16 @@ import Layout from '../../layouts/Layout.astro';
     </div>
 
   </section>
+
+  <!-- LIGHTBOX SCREENSHOTS -->
+  <div class="screen-lightbox" id="screenLightbox">
+    <div class="screen-lightbox-inner" onclick="event.stopPropagation()">
+      <img id="screenLbImg" src="" alt="" />
+    </div>
+    <button class="screen-lb-close" onclick="document.getElementById('screenLightbox').classList.remove('open'); document.body.style.overflow=''">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
 
   <!-- CTA -->
   <div class="section-dark">
@@ -437,14 +458,24 @@ import Layout from '../../layouts/Layout.astro';
 /* APP SCREENS */
 .app-screens { overflow: hidden; }
 
+.screens-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .screens-scroll {
   display: flex;
   gap: 12px;
   overflow-x: auto;
   padding-bottom: 8px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--blue-light) transparent;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  flex: 1;
 }
+
+.screens-scroll::-webkit-scrollbar { display: none; }
 
 .screen-img {
   height: 380px;
@@ -456,6 +487,30 @@ import Layout from '../../layouts/Layout.astro';
 }
 
 .screen-img:hover { transform: scale(1.02); }
+
+.screen-prev,
+.screen-next {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 0.5px solid rgba(43,79,216,0.2);
+  color: var(--blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(43,79,216,0.1);
+}
+
+.screen-prev:hover,
+.screen-next:hover {
+  background: var(--blue);
+  color: var(--white);
+  border-color: var(--blue);
+}
 
 /* APP FEATURES */
 .app-features {
@@ -519,7 +574,53 @@ import Layout from '../../layouts/Layout.astro';
 .cs-title { font-size: 20px; font-weight: 500; color: var(--blue-dark); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; }
 .cs-desc { font-size: 14px; color: var(--blue-mid); line-height: 1.7; margin-bottom: 20px; max-width: 480px; margin-left: auto; margin-right: auto; }
 
-/* CTA */
+/* LIGHTBOX */
+.screen-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,10,20,0.95);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+
+.screen-lightbox.open { display: flex; }
+
+.screen-lightbox-inner {
+  max-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.screen-lightbox-inner img {
+  max-height: 88vh;
+  max-width: 90vw;
+  object-fit: contain;
+  border-radius: var(--r-md);
+  display: block;
+}
+
+.screen-lb-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.screen-lb-close:hover { background: rgba(255,255,255,0.2); }
 .cta-section { text-align: center; }
 .cta-section .eyebrow { display: block; margin-bottom: 8px; }
 .cta-section h2 { margin-bottom: 16px; }
@@ -550,13 +651,49 @@ import Layout from '../../layouts/Layout.astro';
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-
         blocks.forEach(block => {
           const cat = block.dataset.cat;
-          const show = filter === 'tutti' || cat === filter;
-          block.classList.toggle('hidden', !show);
+          block.classList.toggle('hidden', filter !== 'tutti' && cat !== filter);
         });
       });
+    });
+
+    // Carousel
+    const scroll = document.querySelector('.screens-scroll');
+    const prev = document.querySelector('.screen-prev');
+    const next = document.querySelector('.screen-next');
+
+    if (scroll && prev && next) {
+      const step = 200;
+      prev.addEventListener('click', () => scroll.scrollBy({ left: -step, behavior: 'smooth' }));
+      next.addEventListener('click', () => scroll.scrollBy({ left: step, behavior: 'smooth' }));
+    }
+
+    // Lightbox per screenshot app
+    const lb = document.getElementById('screenLightbox');
+    const lbImg = document.getElementById('screenLbImg');
+
+    document.querySelectorAll('.screen-img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        if (!lb || !lbImg) return;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    lb?.addEventListener('click', () => {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        lb?.classList.remove('open');
+        document.body.style.overflow = '';
+      }
     });
   });
 </script>
