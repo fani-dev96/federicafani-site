@@ -81,13 +81,10 @@ import Layout from '../../layouts/Layout.astro';
         </div>
 
         <div class="project-gallery">
-          <div class="smm-grid">
-            <img src="/images/portfolio/magnebevo_post1.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
-            <img src="/images/portfolio/magnebevo_post2.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
-            <img src="/images/portfolio/magnebevo_post3.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
-            <img src="/images/portfolio/magnebevo_post4.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
+          <div class="smm-featured">
+            <img src="/images/portfolio/magnebevo_anniversario.jpg" alt="Magnebevo — 10° Anniversario, Via del Pigneto" loading="lazy" class="smm-featured-img" />
           </div>
-          <p class="gallery-note">Alcuni contenuti prodotti per il profilo Instagram e Facebook di Magnebevo.</p>
+          <p class="gallery-note">10° anniversario di Magnebevo — Via del Pigneto 95, Roma.</p>
         </div>
       </div>
     </div>
@@ -444,24 +441,23 @@ import Layout from '../../layouts/Layout.astro';
 
 .project-links { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* SMM GALLERY */
-.smm-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
+/* SMM FEATURED */
+.smm-featured {
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 0.5px solid rgba(43,79,216,0.1);
   margin-bottom: 10px;
 }
 
-.smm-img {
+.smm-featured-img {
   width: 100%;
-  aspect-ratio: 1;
+  height: 280px;
   object-fit: cover;
-  border-radius: var(--r-md);
-  border: 0.5px solid rgba(43,79,216,0.1);
-  transition: transform 0.2s ease;
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.smm-img:hover { transform: scale(1.02); }
+.smm-featured:hover .smm-featured-img { transform: scale(1.03); }
 
 .gallery-note {
   font-size: 11px;
