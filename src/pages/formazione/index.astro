@@ -157,11 +157,18 @@ const certificazioni = [
   </section>
 
   <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox" id="lightbox">
     <button class="lightbox-close" id="lightbox-close">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
-    <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()" />
+    <button class="lightbox-prev" id="lightbox-prev">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="" />
+    <button class="lightbox-next" id="lightbox-next">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox-caption" id="lightbox-caption"></div>
   </div>
 
   <!-- NOTE -->
@@ -429,17 +436,17 @@ const certificazioni = [
   align-items: center;
   justify-content: center;
   padding: 40px;
-  cursor: zoom-out;
 }
 
 .lightbox.open { display: flex; }
 
 .lightbox img {
-  max-width: 90vw;
+  max-width: 80vw;
   max-height: 85vh;
   object-fit: contain;
   border-radius: var(--r-md);
   box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  cursor: default;
 }
 
 .lightbox-close {
@@ -457,9 +464,44 @@ const certificazioni = [
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease;
+  z-index: 10;
 }
 
 .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover,
+.lightbox-next:hover { background: rgba(255,255,255,0.2); }
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
 
 /* NOTE */
 .note-section { padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(48px, 6vw, 80px); }
@@ -511,36 +553,62 @@ const certificazioni = [
       });
     });
 
-    // Lightbox — event delegation così funziona anche con accordion chiuso
+    // Lightbox con navigazione
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightboxImg');
+    const lbCaption = document.getElementById('lightbox-caption');
+    let certImages = [];
+    let currentCertIndex = 0;
+
+    function openCertLightbox(idx) {
+      if (idx < 0 || idx >= certImages.length) return;
+      currentCertIndex = idx;
+      const img = certImages[idx];
+      if (!lbImg) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      if (lbCaption) lbCaption.textContent = `${idx + 1} / ${certImages.length}`;
+      lb?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Raccoglie le immagini con event delegation
     document.addEventListener('click', e => {
       const imgWrap = e.target.closest('.cert-img-wrap');
       if (imgWrap) {
+        certImages = Array.from(document.querySelectorAll('.cert-img-wrap img'));
         const img = imgWrap.querySelector('img');
-        if (img) {
-          const lb = document.getElementById('lightbox');
-          const lbImg = document.getElementById('lightboxImg');
-          lbImg.src = img.src;
-          lbImg.alt = img.alt;
-          lb.classList.add('open');
-          document.body.style.overflow = 'hidden';
-        }
+        const idx = certImages.indexOf(img);
+        openCertLightbox(idx >= 0 ? idx : 0);
       }
     });
 
-    // Chiudi lightbox cliccando fuori
-    document.getElementById('lightbox')?.addEventListener('click', e => {
-      if (e.target === document.getElementById('lightbox') || e.target === document.getElementById('lightbox-close')) {
-        document.getElementById('lightbox').classList.remove('open');
-        document.body.style.overflow = '';
-      }
+    document.getElementById('lightbox-prev')?.addEventListener('click', e => {
+      e.stopPropagation();
+      openCertLightbox(currentCertIndex - 1);
     });
 
-    // Chiudi con Escape
+    document.getElementById('lightbox-next')?.addEventListener('click', e => {
+      e.stopPropagation();
+      openCertLightbox(currentCertIndex + 1);
+    });
+
+    document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+
+    lb?.addEventListener('click', e => {
+      if (e.target === lb) closeLightbox();
+    });
+
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        document.getElementById('lightbox')?.classList.remove('open');
-        document.body.style.overflow = '';
-      }
+      if (!lb?.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') openCertLightbox(currentCertIndex - 1);
+      if (e.key === 'ArrowRight') openCertLightbox(currentCertIndex + 1);
     });
   });
 </script>
