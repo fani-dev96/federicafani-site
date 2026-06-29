@@ -511,30 +511,31 @@ const certificazioni = [
       });
     });
 
-    // Lightbox
-    document.querySelectorAll('.cert-img-wrap img').forEach(img => {
-      img.addEventListener('click', () => {
-        const lb = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightboxImg');
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lb.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
+    // Lightbox — event delegation così funziona anche con accordion chiuso
+    document.addEventListener('click', e => {
+      const imgWrap = e.target.closest('.cert-img-wrap');
+      if (imgWrap) {
+        const img = imgWrap.querySelector('img');
+        if (img) {
+          const lb = document.getElementById('lightbox');
+          const lbImg = document.getElementById('lightboxImg');
+          lbImg.src = img.src;
+          lbImg.alt = img.alt;
+          lb.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        }
+      }
     });
 
-    document.getElementById('lightbox')?.addEventListener('click', () => {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
+    // Chiudi lightbox cliccando fuori
+    document.getElementById('lightbox')?.addEventListener('click', e => {
+      if (e.target === document.getElementById('lightbox') || e.target === document.getElementById('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+      }
     });
 
-    document.getElementById('lightboxImg')?.addEventListener('click', e => e.stopPropagation());
-
-    document.getElementById('lightbox-close')?.addEventListener('click', () => {
-      document.getElementById('lightbox').classList.remove('open');
-      document.body.style.overflow = '';
-    });
-
+    // Chiudi con Escape
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         document.getElementById('lightbox')?.classList.remove('open');
