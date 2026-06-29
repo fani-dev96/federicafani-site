@@ -212,12 +212,19 @@ import Layout from '../../layouts/Layout.astro';
 
   <!-- LIGHTBOX SCREENSHOTS -->
   <div class="screen-lightbox" id="screenLightbox">
-    <div class="screen-lightbox-inner" onclick="event.stopPropagation()">
+    <button class="screen-lb-prev" id="screenLbPrev">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="screen-lightbox-inner">
       <img id="screenLbImg" src="" alt="" />
     </div>
-    <button class="screen-lb-close" onclick="document.getElementById('screenLightbox').classList.remove('open'); document.body.style.overflow=''">
+    <button class="screen-lb-next" id="screenLbNext">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <button class="screen-lb-close" id="screenLbClose">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
+    <div class="screen-lb-caption" id="screenLbCaption"></div>
   </div>
 
   <!-- CTA -->
@@ -597,10 +604,11 @@ import Layout from '../../layouts/Layout.astro';
 
 .screen-lightbox-inner img {
   max-height: 88vh;
-  max-width: 90vw;
+  max-width: 80vw;
   object-fit: contain;
   border-radius: var(--r-md);
   display: block;
+  cursor: default;
 }
 
 .screen-lb-close {
@@ -618,9 +626,44 @@ import Layout from '../../layouts/Layout.astro';
   justify-content: center;
   cursor: pointer;
   transition: background 0.2s ease;
+  z-index: 10;
 }
 
 .screen-lb-close:hover { background: rgba(255,255,255,0.2); }
+
+.screen-lb-prev,
+.screen-lb-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.screen-lb-prev { left: 20px; }
+.screen-lb-next { right: 20px; }
+.screen-lb-prev:hover,
+.screen-lb-next:hover { background: rgba(255,255,255,0.2); }
+
+.screen-lb-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
 .cta-section { text-align: center; }
 .cta-section .eyebrow { display: block; margin-bottom: 8px; }
 .cta-section h2 { margin-bottom: 16px; }
@@ -669,31 +712,57 @@ import Layout from '../../layouts/Layout.astro';
       next.addEventListener('click', () => scroll.scrollBy({ left: step, behavior: 'smooth' }));
     }
 
-    // Lightbox per screenshot app
+    // Lightbox per screenshot app con navigazione
     const lb = document.getElementById('screenLightbox');
     const lbImg = document.getElementById('screenLbImg');
+    const lbCaption = document.getElementById('screenLbCaption');
+    let screenImages = [];
+    let currentScreenIndex = 0;
 
-    document.querySelectorAll('.screen-img').forEach(img => {
+    function openScreenLightbox(idx) {
+      if (idx < 0 || idx >= screenImages.length) return;
+      currentScreenIndex = idx;
+      const img = screenImages[idx];
+      if (!lbImg) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      if (lbCaption) lbCaption.textContent = `${idx + 1} / ${screenImages.length}`;
+      lb?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeScreenLightbox() {
+      lb?.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    screenImages = Array.from(document.querySelectorAll('.screen-img'));
+    screenImages.forEach((img, idx) => {
       img.style.cursor = 'zoom-in';
-      img.addEventListener('click', () => {
-        if (!lb || !lbImg) return;
-        lbImg.src = img.src;
-        lbImg.alt = img.alt;
-        lb.classList.add('open');
-        document.body.style.overflow = 'hidden';
-      });
+      img.addEventListener('click', () => openScreenLightbox(idx));
     });
 
-    lb?.addEventListener('click', () => {
-      lb.classList.remove('open');
-      document.body.style.overflow = '';
+    document.getElementById('screenLbPrev')?.addEventListener('click', e => {
+      e.stopPropagation();
+      openScreenLightbox(currentScreenIndex - 1);
+    });
+
+    document.getElementById('screenLbNext')?.addEventListener('click', e => {
+      e.stopPropagation();
+      openScreenLightbox(currentScreenIndex + 1);
+    });
+
+    document.getElementById('screenLbClose')?.addEventListener('click', closeScreenLightbox);
+
+    lb?.addEventListener('click', e => {
+      if (e.target === lb) closeScreenLightbox();
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        lb?.classList.remove('open');
-        document.body.style.overflow = '';
-      }
+      if (!lb?.classList.contains('open')) return;
+      if (e.key === 'Escape') closeScreenLightbox();
+      if (e.key === 'ArrowLeft') openScreenLightbox(currentScreenIndex - 1);
+      if (e.key === 'ArrowRight') openScreenLightbox(currentScreenIndex + 1);
     });
   });
 </script>
