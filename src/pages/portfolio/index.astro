@@ -1,0 +1,562 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Portfolio — Federica Fanì"
+  description="Progetti finiti, progetti in corso, progetti che non posso ancora raccontare. Per ora, quelli che posso."
+>
+
+  <!-- HERO -->
+  <section class="port-hero">
+    <div class="port-hero-inner">
+      <div class="hero-eyebrow reveal">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow">Lavori</span>
+      </div>
+      <h1 class="reveal reveal-delay-1">Portfolio</h1>
+      <p class="port-hero-sub reveal reveal-delay-2">
+        Progetti finiti, progetti in corso, progetti che non posso ancora raccontare. Per ora, quelli che posso.
+      </p>
+    </div>
+  </section>
+
+  <!-- FILTRI -->
+  <section class="section port-section">
+    <div class="port-filters reveal">
+      <button class="pf-btn active" data-filter="tutti">Tutti</button>
+      <button class="pf-btn" data-filter="smm">Social Media</button>
+      <button class="pf-btn" data-filter="app">App & Dev</button>
+    </div>
+
+    <!-- MAGNEBEVO SMM -->
+    <div class="project-block reveal" data-cat="smm">
+      <div class="project-block-header">
+        <div class="pb-tag">Social Media Management</div>
+        <div class="pb-status pb-status-active">Attivo</div>
+      </div>
+
+      <div class="project-main-grid">
+        <div class="project-info">
+          <h2 class="project-title">Magnebevo</h2>
+          <p class="project-sub">Bar · Via del Pigneto 93, Roma · Da giugno 2025</p>
+          <p class="project-desc">
+            Magnebevo nasce nel 2016 al Pigneto — dieci anni di storia, cocktail, cultura e quartiere. Gestisco la comunicazione social del locale con un approccio fotografico e narrativo: ogni contenuto racconta l'identità di un posto che non vuole essere solo un bar.
+          </p>
+
+          <div class="project-stats">
+            <div class="stat-item">
+              <div class="stat-val">~4.000</div>
+              <div class="stat-label">Follower Instagram</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-val">~4.000</div>
+              <div class="stat-label">Follower Facebook</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-val">85+</div>
+              <div class="stat-label">Contenuti prodotti</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-val">12+</div>
+              <div class="stat-label">Mesi di collaborazione</div>
+            </div>
+          </div>
+
+          <div class="project-tags">
+            <span class="ptag">Instagram</span>
+            <span class="ptag">Facebook</span>
+            <span class="ptag">Fotografia</span>
+            <span class="ptag">Reels</span>
+            <span class="ptag">Stories</span>
+            <span class="ptag">Piano editoriale</span>
+          </div>
+
+          <div class="project-links">
+            <a href="https://instagram.com/magnebevo_pigneto" target="_blank" rel="noopener" class="btn btn-outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              @magnebevo_pigneto
+            </a>
+          </div>
+        </div>
+
+        <div class="project-gallery">
+          <div class="smm-grid">
+            <img src="/images/portfolio/magnebevo_post1.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
+            <img src="/images/portfolio/magnebevo_post2.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
+            <img src="/images/portfolio/magnebevo_post3.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
+            <img src="/images/portfolio/magnebevo_post4.jpg" alt="Magnebevo — contenuto social" loading="lazy" onerror="this.closest('.smm-cell').style.display='none'" class="smm-img" />
+          </div>
+          <p class="gallery-note">Alcuni contenuti prodotti per il profilo Instagram e Facebook di Magnebevo.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAGNEBEVO CLIENT APP -->
+    <div class="project-block reveal reveal-delay-1" data-cat="app">
+      <div class="project-block-header">
+        <div class="pb-tag">App Development · Flutter · Android</div>
+        <div class="pb-status pb-status-active">Live</div>
+      </div>
+
+      <div class="project-main-grid">
+        <div class="project-info">
+          <h2 class="project-title">Magnebevo App</h2>
+          <p class="project-sub">App Android per i clienti · Flutter · Firebase</p>
+          <p class="project-desc">
+            App Android nativa per i clienti del locale. Menu bilingue IT/EN sempre aggiornato, promozioni in tempo reale, calendario eventi, prenotazione tavolo e sistema fedeltà con punti e premi riscattabili tramite QR code.
+          </p>
+
+          <div class="app-features">
+            <div class="app-feature">
+              <span class="af-ico">🍹</span>
+              <span>Menu cocktail e cibo bilingue (IT/EN)</span>
+            </div>
+            <div class="app-feature">
+              <span class="af-ico">🎫</span>
+              <span>Promozioni e eventi in tempo reale</span>
+            </div>
+            <div class="app-feature">
+              <span class="af-ico">📅</span>
+              <span>Prenotazione tavolo integrata</span>
+            </div>
+            <div class="app-feature">
+              <span class="af-ico">⭐</span>
+              <span>Sistema punti con tessera QR e premi</span>
+            </div>
+            <div class="app-feature">
+              <span class="af-ico">🗺️</span>
+              <span>Info locale, orari e Google Maps</span>
+            </div>
+          </div>
+
+          <div class="project-tags">
+            <span class="ptag">Flutter</span>
+            <span class="ptag">Dart</span>
+            <span class="ptag">Firebase</span>
+            <span class="ptag">Android</span>
+            <span class="ptag">Bilingue IT/EN</span>
+          </div>
+        </div>
+
+        <div class="app-screens">
+          <div class="screens-scroll">
+            <img src="/images/portfolio/app_magnebevo_home.jpg" alt="Magnebevo App — Home" loading="lazy" class="screen-img" />
+            <img src="/images/portfolio/app_magnebevo_menu.jpg" alt="Magnebevo App — Menu" loading="lazy" class="screen-img" />
+            <img src="/images/portfolio/app_magnebevo_punti.jpg" alt="Magnebevo App — Punti" loading="lazy" class="screen-img" />
+            <img src="/images/portfolio/app_magnebevo_prenota.jpg" alt="Magnebevo App — Prenota" loading="lazy" class="screen-img" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAGNEBEVO STAFF APP -->
+    <div class="project-block reveal reveal-delay-2" data-cat="app">
+      <div class="project-block-header">
+        <div class="pb-tag">App Development · Flutter · Android</div>
+        <div class="pb-status pb-status-active">Live</div>
+      </div>
+
+      <div class="project-main-grid project-main-grid-reverse">
+        <div class="project-info">
+          <h2 class="project-title">Magnebevo Staff App</h2>
+          <p class="project-sub">App Android per la gestione interna · Flutter · Firebase</p>
+          <p class="project-desc">
+            App Android ad uso interno per lo staff del locale. Strumento operativo pensato per semplificare la comunicazione, la gestione delle prenotazioni e l'organizzazione quotidiana del team.
+          </p>
+
+          <div class="project-tags">
+            <span class="ptag">Flutter</span>
+            <span class="ptag">Dart</span>
+            <span class="ptag">Firebase</span>
+            <span class="ptag">Android</span>
+            <span class="ptag">Uso interno</span>
+          </div>
+
+          <div class="project-note">
+            Gli screenshot non sono disponibili pubblicamente per ragioni di privacy operativa del cliente.
+          </div>
+        </div>
+
+        <div class="project-placeholder">
+          <div class="placeholder-inner">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue)"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <span>Screenshot riservati</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COMING SOON -->
+    <div class="coming-soon-block reveal">
+      <div class="cs-inner">
+        <div class="cs-ico">🔒</div>
+        <div class="cs-title">Altri progetti in arrivo</div>
+        <div class="cs-desc">Progetti SaaS in sviluppo. I dettagli saranno disponibili al lancio. Scrivimi se vuoi saperne di più.</div>
+        <a href="/contatti" class="btn btn-outline">Contattami</a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CTA -->
+  <div class="section-dark">
+    <section class="section cta-section">
+      <div class="cta-inner">
+        <span class="eyebrow eyebrow-light reveal">Lavoriamo insieme</span>
+        <h2 class="sec-title-light reveal reveal-delay-1">Il tuo progetto è il prossimo?</h2>
+        <p class="cta-sub reveal reveal-delay-2">Che sia un profilo social da costruire o un'app da sviluppare, scrivimi e vediamo cosa possiamo fare insieme.</p>
+        <div class="cta-btns reveal reveal-delay-3">
+          <a href="/contatti" class="btn btn-gold">Scrivimi</a>
+          <a href="/servizi" class="btn btn-outline-light">Scopri i servizi</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</Layout>
+
+<style>
+.port-hero {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px);
+  background: var(--blue-pale);
+}
+
+.port-hero-inner { max-width: 1200px; margin: 0 auto; }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.port-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 300;
+  color: var(--blue-dark);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.port-hero-sub {
+  font-size: 16px;
+  color: var(--blue-mid);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.port-section {
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* FILTRI */
+.port-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.pf-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(43,79,216,0.2);
+  color: var(--blue-mid);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pf-btn:hover { background: var(--blue-light); color: var(--blue); }
+.pf-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+.pf-btn.hidden-block { display: none; }
+
+/* PROJECT BLOCK */
+.project-block {
+  background: var(--white);
+  border: 0.5px solid rgba(43,79,216,0.12);
+  border-radius: var(--r-lg);
+  padding: clamp(24px, 3vw, 40px);
+  transition: box-shadow 0.2s ease;
+}
+
+.project-block:hover { box-shadow: 0 4px 24px rgba(43,79,216,0.08); }
+.project-block.hidden { display: none; }
+
+.project-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  gap: 12px;
+}
+
+.pb-tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue);
+}
+
+.pb-status {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.pb-status-active {
+  background: #dcfce7;
+  color: #15803d;
+  border: 0.5px solid #86efac;
+}
+
+.project-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 4vw, 56px);
+  align-items: start;
+}
+
+.project-main-grid-reverse { direction: rtl; }
+.project-main-grid-reverse > * { direction: ltr; }
+
+.project-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 300;
+  color: var(--blue-dark);
+  margin-bottom: 6px;
+}
+
+.project-sub {
+  font-size: 13px;
+  color: var(--blue-mid);
+  margin-bottom: 16px;
+}
+
+.project-desc {
+  font-size: 14px;
+  color: var(--blue-mid);
+  line-height: 1.8;
+  margin-bottom: 24px;
+}
+
+/* STATS */
+.project-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: var(--blue-light);
+  border-radius: var(--r-md);
+}
+
+.stat-item { text-align: center; }
+
+.stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--blue);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--blue-mid);
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+
+/* TAGS */
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.ptag {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: var(--blue-light);
+  color: var(--blue);
+  border: 0.5px solid rgba(43,79,216,0.2);
+}
+
+.project-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* SMM GALLERY */
+.smm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.smm-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  border: 0.5px solid rgba(43,79,216,0.1);
+  transition: transform 0.2s ease;
+}
+
+.smm-img:hover { transform: scale(1.02); }
+
+.gallery-note {
+  font-size: 11px;
+  color: var(--blue-mid);
+  font-style: italic;
+  text-align: center;
+}
+
+/* APP SCREENS */
+.app-screens { overflow: hidden; }
+
+.screens-scroll {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--blue-light) transparent;
+}
+
+.screen-img {
+  height: 380px;
+  width: auto;
+  border-radius: var(--r-md);
+  border: 0.5px solid rgba(43,79,216,0.1);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.screen-img:hover { transform: scale(1.02); }
+
+/* APP FEATURES */
+.app-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.app-feature {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: var(--blue-mid);
+}
+
+.af-ico { font-size: 16px; flex-shrink: 0; }
+
+/* PLACEHOLDER */
+.project-placeholder {
+  border: 0.5px dashed rgba(43,79,216,0.2);
+  border-radius: var(--r-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  background: var(--blue-pale);
+}
+
+.placeholder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--blue-mid);
+  font-size: 13px;
+}
+
+/* PROJECT NOTE */
+.project-note {
+  font-size: 12px;
+  color: var(--blue-mid);
+  font-style: italic;
+  padding: 12px 16px;
+  background: var(--blue-light);
+  border-radius: var(--r-sm);
+  border-left: 3px solid var(--blue);
+}
+
+/* COMING SOON */
+.coming-soon-block {
+  background: var(--blue-pale);
+  border: 0.5px dashed rgba(43,79,216,0.2);
+  border-radius: var(--r-lg);
+  padding: 40px;
+  text-align: center;
+}
+
+.cs-ico { font-size: 36px; margin-bottom: 12px; }
+.cs-title { font-size: 20px; font-weight: 500; color: var(--blue-dark); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; }
+.cs-desc { font-size: 14px; color: var(--blue-mid); line-height: 1.7; margin-bottom: 20px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+/* CTA */
+.cta-section { text-align: center; }
+.cta-section .eyebrow { display: block; margin-bottom: 8px; }
+.cta-section h2 { margin-bottom: 16px; }
+.cta-sub { font-size: 15px; color: var(--azure); max-width: 480px; margin: 0 auto 32px; line-height: 1.75; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .project-main-grid { grid-template-columns: 1fr; }
+  .project-main-grid-reverse { direction: ltr; }
+  .project-stats { grid-template-columns: 1fr 1fr; }
+  .screen-img { height: 280px; }
+}
+
+@media (max-width: 640px) {
+  .project-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .screen-img { height: 220px; }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.pf-btn');
+    const blocks = document.querySelectorAll('.project-block');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        blocks.forEach(block => {
+          const cat = block.dataset.cat;
+          const show = filter === 'tutti' || cat === filter;
+          block.classList.toggle('hidden', !show);
+        });
+      });
+    });
+  });
+</script>
