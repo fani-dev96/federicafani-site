@@ -1,0 +1,84 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+<Layout title="Contact — Federica Fanì" description="Messages don't bite. Write to me for collaborations, projects, or just to recommend an album." lang="en">
+
+  <section class="contact-hero">
+    <div class="contact-hero-inner">
+      <div class="hero-eyebrow reveal"><span class="eyebrow-line"></span><span class="eyebrow">Let's talk</span></div>
+      <h1 class="reveal reveal-delay-1">Contact</h1>
+      <p class="contact-hero-sub reveal reveal-delay-2">Messages don't bite. Write to me for collaborations, projects, or just to recommend an album.</p>
+    </div>
+  </section>
+
+  <section class="section contact-section">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow reveal">Where to find me</span>
+        <div class="info-items">
+          <a href="mailto:federica.fani96@gmail.com" class="info-item reveal reveal-delay-1">
+            <div class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="info-text"><div class="info-label">Email</div><div class="info-val">federica.fani96@gmail.com</div></div>
+          </a>
+          <a href="tel:+393762951512" class="info-item reveal reveal-delay-2">
+            <div class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.56 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div class="info-text"><div class="info-label">Phone</div><div class="info-val">+39 376 295 1512</div></div>
+          </a>
+          <a href="https://instagram.com/fedefany" target="_blank" rel="noopener" class="info-item reveal reveal-delay-3">
+            <div class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></div>
+            <div class="info-text"><div class="info-label">Instagram</div><div class="info-val">@fedefany</div></div>
+          </a>
+          <a href="https://github.com/fani-dev96" target="_blank" rel="noopener" class="info-item reveal reveal-delay-3">
+            <div class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+            <div class="info-text"><div class="info-label">GitHub</div><div class="info-val">fani-dev96</div></div>
+          </a>
+          <a href="https://linkedin.com/in/fedefany" target="_blank" rel="noopener" class="info-item reveal reveal-delay-3">
+            <div class="info-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div class="info-text"><div class="info-label">LinkedIn</div><div class="info-val">fedefany</div></div>
+          </a>
+        </div>
+        <div class="availability reveal">
+          <div class="avail-dot"></div>
+          <div class="avail-text"><strong>Available for new projects</strong><span>I reply within 24–48 hours</span></div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap reveal reveal-delay-1">
+        <form class="contact-form" id="contactForm" name="contact-en" method="POST" data-netlify="true">
+          <div class="form-group"><label for="nome">Name</label><input type="text" id="nome" name="nome" placeholder="Your name" required /></div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" name="email" placeholder="your@email.com" required /></div>
+          <div class="form-group">
+            <label for="servizio">I'm interested in</label>
+            <select id="servizio" name="servizio">
+              <option value="">Select a service</option>
+              <option value="smm">Social Media Management</option>
+              <option value="app-dev">App & SaaS Development</option>
+              <option value="entrambi">Both</option>
+              <option value="altro">Other / just getting to know each other</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="messaggio">Message</label><textarea id="messaggio" name="messaggio" rows="5" placeholder="Tell me about your project, or recommend an album..." required></textarea></div>
+          <button type="submit" class="btn btn-primary form-submit">Send message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-dark">
+    <section class="section faq-section">
+      <div class="sec-header">
+        <div class="sec-header-left">
+          <span class="eyebrow eyebrow-light reveal">Before you write</span>
+          <h2 class="sec-title-light reveal reveal-delay-1">Frequently asked questions</h2>
+        </div>
+      </div>
+      <div class="faq-grid">
+        <div class="faq-item reveal"><div class="faq-q">Do you only work in Rome?</div><div class="faq-a">For social media management and app development I work fully remotely, so anywhere. For photography and on-site shoots I mainly operate in the Pigneto area and East Rome.</div></div>
+        <div class="faq-item reveal reveal-delay-1"><div class="faq-q">How far in advance should I contact you?</div><div class="faq-a">The sooner the better. For new SMM clients I usually have availability within 2–4 weeks. For development projects it depends on the scope.</div></div>
+        <div class="faq-item reveal reveal-delay-2"><div class="faq-q">Do you offer free quotes?</div><div class="faq-a">Yes. For SMM packages, indicative prices are already on the site. For app development projects, the initial feasibility assessment is always free.</div></div>
+        <div class="faq-item reveal reveal-delay-3"><div class="faq-q">Is there a minimum contract length?</div><div class="faq-a">For SMM I ask for a minimum of 3 months — it takes time to see real results. For development projects it depends on the agreement.</div></div>
+      </div>
+    </section>
+  </div>
+
+</Layout>
