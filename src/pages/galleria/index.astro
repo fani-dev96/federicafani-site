@@ -1,0 +1,462 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const foto = [
+  // MAGNEBEVO — Locale
+  { src: "/foto/magnebevo_02.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
+  { src: "/foto/magnebevo_03.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
+  { src: "/foto/magnebevo_04.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
+  { src: "/foto/magnebevo_05.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
+  { src: "/foto/magnebevo_06.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
+
+  // QUARTIEREVINO — Eventi
+  { src: "/foto/quartierevino_01.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_02.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_03.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_04.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_05.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_06.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_07.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_08.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_09.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_10.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_11.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_12.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_13.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_14.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_15.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_16.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_17.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+  { src: "/foto/quartierevino_18.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
+
+  // ANNIVERSARIO MAGNEBEVO — Eventi
+  { src: "/foto/anniversario_01.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_02.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_03.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_04.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_05.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_06.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_07.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_08.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_09.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_10.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_11.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_12.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_13.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_14.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_15.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_16.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+  { src: "/foto/anniversario_17.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
+];
+
+const categorie = [
+  { id: "tutti", label: "Tutti" },
+  { id: "eventi", label: "Eventi" },
+  { id: "locale", label: "Locale" },
+  { id: "concerti", label: "Concerti" },
+  { id: "club", label: "Club" },
+  { id: "portrait", label: "Portrait" },
+  { id: "street", label: "Street" },
+];
+---
+
+<Layout
+  title="Galleria — Federica Fanì"
+  description="Concerti, club, eventi, locali. Scattate con una Nikon e tanta pazienza per la luce giusta."
+>
+
+  <!-- HERO -->
+  <section class="gall-hero">
+    <div class="gall-hero-inner">
+      <div class="hero-eyebrow reveal">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow">Fotografia</span>
+      </div>
+      <h1 class="reveal reveal-delay-1">Galleria</h1>
+      <p class="gall-hero-sub reveal reveal-delay-2">
+        Concerti, club, persone. Scattate con una Nikon e tanta pazienza per la luce giusta.
+      </p>
+    </div>
+  </section>
+
+  <!-- FILTRI + GRIGLIA -->
+  <section class="section gall-section">
+
+    <!-- FILTRI -->
+    <div class="filters reveal">
+      {categorie.map(cat => (
+        <button
+          class={`filter-btn ${cat.id === 'tutti' ? 'active' : ''}`}
+          data-filter={cat.id}
+        >
+          {cat.label}
+        </button>
+      ))}
+    </div>
+
+    <!-- CONTATORE -->
+    <div class="gall-count reveal reveal-delay-1">
+      <span id="photoCount">{foto.length}</span> foto
+    </div>
+
+    <!-- GRIGLIA -->
+    <div class="gall-grid" id="gallGrid">
+      {foto.map((f, i) => (
+        <div
+          class="gall-item"
+          data-categoria={f.categoria}
+          data-index={i}
+        >
+          <img
+            src={f.src}
+            alt={f.alt}
+            loading="lazy"
+          />
+          <div class="gall-overlay">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- EMPTY STATE -->
+    <div class="gall-empty" id="gallEmpty" style="display:none">
+      <div class="empty-ico">📷</div>
+      <div class="empty-text">Nessuna foto in questa categoria per ora.<br>Torna presto!</div>
+    </div>
+
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lbClose">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="lightbox-prev" id="lbPrev">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="lightbox-img-wrap">
+      <img id="lbImg" src="" alt="" />
+    </div>
+    <button class="lightbox-next" id="lbNext">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="lightbox-caption" id="lbCaption"></div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section-dark">
+    <section class="section cta-section">
+      <div class="cta-inner">
+        <span class="eyebrow eyebrow-light reveal">Collaboriamo</span>
+        <h2 class="sec-title-light reveal reveal-delay-1">Vuoi queste foto per la tua attività?</h2>
+        <p class="cta-sub reveal reveal-delay-2">La fotografia è inclusa nei pacchetti Standard e Premium, oppure disponibile come servizio separato.</p>
+        <div class="cta-btns reveal reveal-delay-3">
+          <a href="/contatti" class="btn btn-gold">Scrivimi</a>
+          <a href="/servizi/smm" class="btn btn-outline-light">Scopri i pacchetti</a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</Layout>
+
+<style>
+/* HERO */
+.gall-hero {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px);
+  background: var(--blue-pale);
+}
+
+.gall-hero-inner { max-width: 1200px; margin: 0 auto; }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.gall-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 300;
+  color: var(--blue-dark);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.gall-hero-sub {
+  font-size: 16px;
+  color: var(--blue-mid);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* GALLERY SECTION */
+.gall-section {
+  padding-top: clamp(32px, 4vw, 56px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+/* FILTRI */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.filter-btn {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 0.5px solid rgba(43,79,216,0.2);
+  color: var(--blue-mid);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.filter-btn:hover { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
+.filter-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); }
+
+.gall-count {
+  font-size: 12px;
+  color: var(--blue-mid);
+  margin-bottom: 24px;
+}
+
+/* GRIGLIA */
+.gall-grid {
+  columns: 4;
+  column-gap: 10px;
+}
+
+.gall-item {
+  position: relative;
+  break-inside: avoid;
+  margin-bottom: 10px;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.gall-item.hidden { display: none; }
+
+.gall-item img {
+  width: 100%;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gall-item:hover img { transform: scale(1.04); }
+
+.gall-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,22,40,0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.gall-item:hover .gall-overlay { opacity: 1; }
+
+/* EMPTY */
+.gall-empty {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-ico { font-size: 48px; margin-bottom: 16px; }
+.empty-text { font-size: 15px; color: var(--blue-mid); line-height: 1.7; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,10,20,0.95);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox-img-wrap {
+  max-width: 85vw;
+  max-height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-img-wrap img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--r-md);
+  display: block;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  z-index: 10;
+}
+
+.lightbox-prev { left: 20px; }
+.lightbox-next { right: 20px; }
+.lightbox-prev:hover,
+.lightbox-next:hover { background: rgba(255,255,255,0.2); }
+
+.lightbox-caption {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: rgba(255,255,255,0.5);
+  white-space: nowrap;
+}
+
+/* CTA */
+.cta-section { text-align: center; }
+.cta-section .eyebrow { display: block; margin-bottom: 8px; }
+.cta-section h2 { margin-bottom: 16px; }
+.cta-sub { font-size: 15px; color: var(--azure); max-width: 480px; margin: 0 auto 32px; line-height: 1.75; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+/* RESPONSIVE */
+@media (max-width: 1024px) { .gall-grid { columns: 3; } }
+@media (max-width: 768px) { .gall-grid { columns: 2; } }
+@media (max-width: 480px) {
+  .gall-grid { columns: 1; }
+  .lightbox-prev { left: 8px; }
+  .lightbox-next { right: 8px; }
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = Array.from(document.querySelectorAll('.gall-item'));
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const countEl = document.getElementById('photoCount');
+    const emptyEl = document.getElementById('gallEmpty');
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lbImg');
+    const lbCaption = document.getElementById('lbCaption');
+
+    let currentIndex = 0;
+    let visibleItems = [...items];
+
+    // FILTRI
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+
+        visibleItems = [];
+        items.forEach(item => {
+          const cat = item.dataset.categoria;
+          const show = filter === 'tutti' || cat === filter;
+          item.classList.toggle('hidden', !show);
+          if (show) visibleItems.push(item);
+        });
+
+        if (countEl) countEl.textContent = visibleItems.length;
+        if (emptyEl) emptyEl.style.display = visibleItems.length === 0 ? 'block' : 'none';
+      });
+    });
+
+    // LIGHTBOX APERTURA
+    document.addEventListener('click', e => {
+      const item = e.target.closest('.gall-item');
+      if (!item) return;
+      currentIndex = visibleItems.indexOf(item);
+      openLightbox(currentIndex);
+    });
+
+    function openLightbox(idx) {
+      if (idx < 0 || idx >= visibleItems.length) return;
+      currentIndex = idx;
+      const item = visibleItems[idx];
+      const img = item.querySelector('img');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      if (lbCaption) lbCaption.textContent = `${idx + 1} / ${visibleItems.length}`;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // NAVIGAZIONE
+    document.getElementById('lbClose')?.addEventListener('click', closeLightbox);
+    document.getElementById('lbPrev')?.addEventListener('click', () => openLightbox(currentIndex - 1));
+    document.getElementById('lbNext')?.addEventListener('click', () => openLightbox(currentIndex + 1));
+
+    lb?.addEventListener('click', e => {
+      if (e.target === lb) closeLightbox();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
+      if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
+    });
+  });
+</script>
