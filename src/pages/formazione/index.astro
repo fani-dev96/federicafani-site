@@ -1,0 +1,524 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const certificazioni = [
+  {
+    piattaforma: "Luca La Mesa",
+    categoria: "Social Media Training",
+    colore: "#2B4FD8",
+    items: [
+      {
+        titolo: "Social Media Training — Stagione 1",
+        data: "4 dicembre 2020",
+        numero: "N. 52921025",
+        img: "/images/certs/cert1.jpg",
+        desc: "Fondamenti di social media marketing: strategia, contenuti, gestione profili e analisi delle performance."
+      },
+      {
+        titolo: "Social Media Training — Stagione 2",
+        data: "6 aprile 2021",
+        numero: "N. 61086703",
+        img: "/images/certs/cert2.jpg",
+        desc: "Approfondimento su advertising, community management e metriche avanzate."
+      },
+      {
+        titolo: "Social Media Training — Stagione 3",
+        data: "7 dicembre 2021",
+        numero: "N. 72176102",
+        img: "/images/certs/cert3.jpg",
+        desc: "Strategie avanzate di content marketing, personal branding e crescita organica."
+      }
+    ]
+  },
+  {
+    piattaforma: "Sapienza Università di Roma",
+    categoria: "Formazione universitaria",
+    colore: "#8B1A1A",
+    items: [
+      {
+        titolo: "Culture contro la violenza di genere: un approccio transdisciplinare",
+        data: "8 marzo 2023",
+        numero: "5 CFU · Dipartimento di Comunicazione e Ricerca Sociale",
+        img: "/images/certs/cert4.jpg",
+        desc: "Corso di formazione interdisciplinare su comunicazione, genere e cultura. Anno accademico 2022/2023."
+      }
+    ]
+  },
+  {
+    piattaforma: "In arrivo",
+    categoria: "Certificazioni in corso",
+    colore: "#E8C97A",
+    items: [
+      {
+        titolo: "Google Analytics 4",
+        data: "In corso",
+        numero: "Google Skillshop",
+        img: null,
+        desc: "Certificazione ufficiale Google su GA4: raccolta dati, analisi, report e ottimizzazione."
+      },
+      {
+        titolo: "Meta Blueprint — Facebook & Instagram Ads",
+        data: "In corso",
+        numero: "Meta Blueprint",
+        img: null,
+        desc: "Certificazione ufficiale Meta su advertising, targeting e ottimizzazione campagne."
+      },
+      {
+        titolo: "HubSpot Social Media Marketing",
+        data: "In corso",
+        numero: "HubSpot Academy",
+        img: null,
+        desc: "Strategia social, content marketing, community management e analytics."
+      },
+      {
+        titolo: "CIPP/E — Certified Information Privacy Professional Europe",
+        data: "In corso",
+        numero: "IAPP",
+        img: null,
+        desc: "Standard europeo per privacy e GDPR. Riconosciuto in tutta l'UE."
+      }
+    ]
+  }
+];
+---
+
+<Layout
+  title="Formazione — Federica Fanì"
+  description="Certificazioni, corsi e formazione. Quello che so fare, ho un pezzo di carta che lo certifica. Quasi sempre."
+>
+
+  <!-- HERO -->
+  <section class="form-hero">
+    <div class="form-hero-inner">
+      <div class="hero-eyebrow reveal">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow">Formazione</span>
+      </div>
+      <h1 class="reveal reveal-delay-1">Certificazioni</h1>
+      <p class="form-hero-sub reveal reveal-delay-2">
+        Quello che so fare, ho un pezzo di carta che lo certifica. Quasi sempre.
+      </p>
+    </div>
+  </section>
+
+  <!-- ACCORDION -->
+  <section class="section form-section">
+    <div class="accordion-wrap">
+      {certificazioni.map((gruppo, gi) => (
+        <div class="acc-gruppo reveal" style={`--gruppo-color: ${gruppo.colore}`}>
+          <button class="acc-header" onclick="toggleGruppo(this)" aria-expanded="false">
+            <div class="acc-header-left">
+              <div class="acc-platform">{gruppo.piattaforma}</div>
+              <div class="acc-category">{gruppo.categoria}</div>
+            </div>
+            <div class="acc-header-right">
+              <span class="acc-count">{gruppo.items.length} {gruppo.items.length === 1 ? 'certificazione' : 'certificazioni'}</span>
+              <svg class="acc-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </button>
+
+          <div class="acc-body">
+            <div class="acc-items">
+              {gruppo.items.map((item, ii) => (
+                <div class="cert-item">
+                  <div class="cert-info">
+                    <div class="cert-title">{item.titolo}</div>
+                    <div class="cert-meta">
+                      <span class="cert-date">{item.data}</span>
+                      <span class="cert-num">{item.numero}</span>
+                    </div>
+                    <div class="cert-desc">{item.desc}</div>
+                  </div>
+                  {item.img ? (
+                    <div class="cert-img-wrap">
+                      <img
+                        src={item.img}
+                        alt={`Certificato ${item.titolo}`}
+                        loading="lazy"
+                        onclick="openLightbox(this.src, this.alt)"
+                      />
+                      <div class="cert-img-overlay">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+                        Visualizza
+                      </div>
+                    </div>
+                  ) : (
+                    <div class="cert-soon-badge">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      In corso
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- NOTE -->
+  <div class="section-dark">
+    <section class="section note-section">
+      <div class="note-grid">
+        <div class="note-item reveal">
+          <div class="note-ico">🎓</div>
+          <div class="note-title">Lauree in corso</div>
+          <div class="note-desc">Mediazione Linguistica (Università di Macerata, 2 esami mancanti) e Scienze della Comunicazione presso Sapienza. Le lauree saranno aggiunte al completamento.</div>
+        </div>
+        <div class="note-item reveal reveal-delay-1">
+          <div class="note-ico">📋</div>
+          <div class="note-title">Certificazioni in arrivo</div>
+          <div class="note-desc">GA4, Meta Blueprint, HubSpot e CIPP/E sono in corso. Saranno aggiunte non appena completate.</div>
+        </div>
+        <div class="note-item reveal reveal-delay-2">
+          <div class="note-ico">🔒</div>
+          <div class="note-title">Certificati con watermark</div>
+          <div class="note-desc">Le immagini dei certificati sono protette da watermark. Se hai bisogno di verificare l'autenticità, scrivimi direttamente.</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</Layout>
+
+<style>
+/* HERO */
+.form-hero {
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px);
+  background: var(--blue-pale);
+}
+
+.form-hero-inner { max-width: 1200px; margin: 0 auto; }
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.eyebrow-line {
+  width: 32px;
+  height: 1px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+
+.form-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 300;
+  color: var(--blue-dark);
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+.form-hero-sub {
+  font-size: 16px;
+  color: var(--blue-mid);
+  font-style: italic;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* FORM SECTION */
+.form-section {
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.accordion-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ACCORDION GRUPPO */
+.acc-gruppo {
+  border: 0.5px solid rgba(43,79,216,0.15);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--white);
+}
+
+.acc-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  gap: 16px;
+  transition: background 0.2s ease;
+  border-left: 4px solid var(--gruppo-color, var(--blue));
+}
+
+.acc-header:hover { background: var(--blue-pale); }
+.acc-gruppo.open .acc-header { background: var(--blue-pale); }
+
+.acc-header-left { display: flex; flex-direction: column; gap: 3px; }
+
+.acc-platform {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--blue-dark);
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.acc-category {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--blue-mid);
+}
+
+.acc-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.acc-count {
+  font-size: 12px;
+  color: var(--blue-mid);
+  white-space: nowrap;
+}
+
+.acc-chevron {
+  color: var(--blue-mid);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.acc-gruppo.open .acc-chevron { transform: rotate(180deg); }
+
+/* ACCORDION BODY */
+.acc-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.acc-gruppo.open .acc-body { max-height: 2000px; }
+
+.acc-items {
+  display: flex;
+  flex-direction: column;
+  border-top: 0.5px solid rgba(43,79,216,0.1);
+}
+
+/* CERT ITEM */
+.cert-item {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 24px;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 0.5px solid rgba(43,79,216,0.08);
+  transition: background 0.2s ease;
+}
+
+.cert-item:last-child { border-bottom: none; }
+.cert-item:hover { background: rgba(43,79,216,0.02); }
+
+.cert-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--blue-dark);
+  margin-bottom: 6px;
+}
+
+.cert-meta {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.cert-date {
+  font-size: 12px;
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.cert-num {
+  font-size: 11px;
+  color: var(--blue-mid);
+  background: var(--blue-light);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.cert-desc {
+  font-size: 13px;
+  color: var(--blue-mid);
+  line-height: 1.7;
+}
+
+/* CERT IMAGE */
+.cert-img-wrap {
+  position: relative;
+  border-radius: var(--r-md);
+  overflow: hidden;
+  cursor: pointer;
+  border: 0.5px solid rgba(43,79,216,0.15);
+}
+
+.cert-img-wrap img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.cert-img-wrap:hover img { transform: scale(1.03); }
+
+.cert-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,22,40,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cert-img-wrap:hover .cert-img-overlay { opacity: 1; }
+
+/* SOON BADGE */
+.cert-soon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gold);
+  background: rgba(232,201,122,0.15);
+  border: 0.5px solid rgba(232,201,122,0.3);
+  padding: 8px 14px;
+  border-radius: 20px;
+  justify-self: center;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,22,40,0.92);
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  cursor: zoom-out;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: var(--r-md);
+  box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.lightbox-close:hover { background: rgba(255,255,255,0.2); }
+
+/* NOTE */
+.note-section { padding-top: clamp(48px, 6vw, 80px); padding-bottom: clamp(48px, 6vw, 80px); }
+
+.note-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.note-item {
+  background: rgba(43,79,216,0.1);
+  border: 0.5px solid rgba(123,167,232,0.2);
+  border-radius: var(--r-lg);
+  padding: 24px;
+}
+
+.note-ico { font-size: 28px; margin-bottom: 12px; }
+.note-title { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 8px; font-family: 'Cormorant Garamond', serif; }
+.note-desc { font-size: 13px; color: var(--azure); line-height: 1.75; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .cert-item { grid-template-columns: 1fr; }
+  .cert-img-wrap img { height: 200px; }
+  .note-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .acc-header { padding: 16px 20px; }
+  .cert-item { padding: 20px; }
+}
+</style>
+
+<script>
+function toggleGruppo(btn) {
+  const gruppo = btn.closest('.acc-gruppo');
+  const isOpen = gruppo.classList.contains('open');
+  document.querySelectorAll('.acc-gruppo.open').forEach(g => g.classList.remove('open'));
+  if (!isOpen) gruppo.classList.add('open');
+  btn.setAttribute('aria-expanded', String(!isOpen));
+}
+
+function openLightbox(src, alt) {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  img.src = src;
+  img.alt = alt;
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+</script>
