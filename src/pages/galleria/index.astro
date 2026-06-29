@@ -1,53 +1,22 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 
-const foto = [
-  // MAGNEBEVO — Locale
-  { src: "/foto/magnebevo_02.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
-  { src: "/foto/magnebevo_03.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
-  { src: "/foto/magnebevo_04.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
-  { src: "/foto/magnebevo_05.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
-  { src: "/foto/magnebevo_06.jpg", categoria: "locale", alt: "Magnebevo — Via del Pigneto" },
+// Import dinamico di tutte le foto in public/foto/
+// La convenzione del nome è: categoria_descrizione_numero.jpg
+const fotoImport = import.meta.glob('/public/foto/*.{jpg,jpeg,png,webp}');
 
-  // QUARTIEREVINO — Eventi
-  { src: "/foto/quartierevino_01.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_02.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_03.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_04.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_05.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_06.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_07.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_08.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_09.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_10.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_11.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_12.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_13.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_14.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_15.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_16.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_17.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-  { src: "/foto/quartierevino_18.jpg", categoria: "eventi", alt: "Quartiere Vino — Pigneto" },
-
-  // ANNIVERSARIO MAGNEBEVO — Eventi
-  { src: "/foto/anniversario_01.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_02.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_03.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_04.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_05.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_06.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_07.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_08.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_09.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_10.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_11.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_12.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_13.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_14.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_15.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_16.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-  { src: "/foto/anniversario_17.jpg", categoria: "eventi", alt: "Magnebevo — 10° Anniversario" },
-];
+const foto = Object.keys(fotoImport).map(path => {
+  const filename = path.split('/').pop() || '';
+  const nameWithoutExt = filename.replace(/\.(jpg|jpeg|png|webp)$/i, '');
+  const parts = nameWithoutExt.split('_');
+  const categoria = parts[0].toLowerCase();
+  const src = `/foto/${filename}`;
+  
+  // Alt text leggibile dal nome file
+  const alt = parts.slice(1, -1).join(' ').replace(/-/g, ' ') || filename;
+  
+  return { src, categoria, alt: `Federica Fanì — ${alt}`, filename };
+}).sort((a, b) => a.filename.localeCompare(b.filename));
 
 const categorie = [
   { id: "tutti", label: "Tutti" },
@@ -58,6 +27,8 @@ const categorie = [
   { id: "portrait", label: "Portrait" },
   { id: "street", label: "Street" },
 ];
+
+const totalFoto = foto.length;
 ---
 
 <Layout
@@ -96,30 +67,37 @@ const categorie = [
 
     <!-- CONTATORE -->
     <div class="gall-count reveal reveal-delay-1">
-      <span id="photoCount">{foto.length}</span> foto
+      <span id="photoCount">{totalFoto}</span> foto
     </div>
 
     <!-- GRIGLIA -->
-    <div class="gall-grid" id="gallGrid">
-      {foto.map((f, i) => (
-        <div
-          class="gall-item"
-          data-categoria={f.categoria}
-          data-index={i}
-        >
-          <img
-            src={f.src}
-            alt={f.alt}
-            loading="lazy"
-          />
-          <div class="gall-overlay">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+    {foto.length > 0 ? (
+      <div class="gall-grid" id="gallGrid">
+        {foto.map((f, i) => (
+          <div
+            class="gall-item"
+            data-categoria={f.categoria}
+            data-index={i}
+          >
+            <img
+              src={f.src}
+              alt={f.alt}
+              loading="lazy"
+            />
+            <div class="gall-overlay">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+    ) : (
+      <div class="gall-empty">
+        <div class="empty-ico">📷</div>
+        <div class="empty-text">Le foto stanno arrivando. Torna presto!</div>
+      </div>
+    )}
 
-    <!-- EMPTY STATE -->
+    <!-- EMPTY STATE per filtri -->
     <div class="gall-empty" id="gallEmpty" style="display:none">
       <div class="empty-ico">📷</div>
       <div class="empty-text">Nessuna foto in questa categoria per ora.<br>Torna presto!</div>
@@ -162,7 +140,6 @@ const categorie = [
 </Layout>
 
 <style>
-/* HERO */
 .gall-hero {
   padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px);
   background: var(--blue-pale);
@@ -200,13 +177,11 @@ const categorie = [
   font-family: 'Cormorant Garamond', serif;
 }
 
-/* GALLERY SECTION */
 .gall-section {
   padding-top: clamp(32px, 4vw, 56px);
   padding-bottom: clamp(48px, 6vw, 80px);
 }
 
-/* FILTRI */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -225,7 +200,6 @@ const categorie = [
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
-  letter-spacing: 0.02em;
 }
 
 .filter-btn:hover { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
@@ -237,7 +211,6 @@ const categorie = [
   margin-bottom: 24px;
 }
 
-/* GRIGLIA */
 .gall-grid {
   columns: 4;
   column-gap: 10px;
@@ -276,7 +249,6 @@ const categorie = [
 
 .gall-item:hover .gall-overlay { opacity: 1; }
 
-/* EMPTY */
 .gall-empty {
   text-align: center;
   padding: 80px 20px;
@@ -285,7 +257,6 @@ const categorie = [
 .empty-ico { font-size: 48px; margin-bottom: 16px; }
 .empty-text { font-size: 15px; color: var(--blue-mid); line-height: 1.7; font-style: italic; font-family: 'Cormorant Garamond', serif; }
 
-/* LIGHTBOX */
 .lightbox {
   position: fixed;
   inset: 0;
@@ -368,14 +339,12 @@ const categorie = [
   white-space: nowrap;
 }
 
-/* CTA */
 .cta-section { text-align: center; }
 .cta-section .eyebrow { display: block; margin-bottom: 8px; }
 .cta-section h2 { margin-bottom: 16px; }
 .cta-sub { font-size: 15px; color: var(--azure); max-width: 480px; margin: 0 auto 32px; line-height: 1.75; }
 .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-/* RESPONSIVE */
 @media (max-width: 1024px) { .gall-grid { columns: 3; } }
 @media (max-width: 768px) { .gall-grid { columns: 2; } }
 @media (max-width: 480px) {
@@ -398,7 +367,6 @@ const categorie = [
     let currentIndex = 0;
     let visibleItems = [...items];
 
-    // FILTRI
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
@@ -413,12 +381,11 @@ const categorie = [
           if (show) visibleItems.push(item);
         });
 
-        if (countEl) countEl.textContent = visibleItems.length;
+        if (countEl) countEl.textContent = String(visibleItems.length);
         if (emptyEl) emptyEl.style.display = visibleItems.length === 0 ? 'block' : 'none';
       });
     });
 
-    // LIGHTBOX APERTURA
     document.addEventListener('click', e => {
       const item = e.target.closest('.gall-item');
       if (!item) return;
@@ -431,19 +398,19 @@ const categorie = [
       currentIndex = idx;
       const item = visibleItems[idx];
       const img = item.querySelector('img');
+      if (!img || !lbImg) return;
       lbImg.src = img.src;
       lbImg.alt = img.alt;
       if (lbCaption) lbCaption.textContent = `${idx + 1} / ${visibleItems.length}`;
-      lb.classList.add('open');
+      lb?.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
-      lb.classList.remove('open');
+      lb?.classList.remove('open');
       document.body.style.overflow = '';
     }
 
-    // NAVIGAZIONE
     document.getElementById('lbClose')?.addEventListener('click', closeLightbox);
     document.getElementById('lbPrev')?.addEventListener('click', () => openLightbox(currentIndex - 1));
     document.getElementById('lbNext')?.addEventListener('click', () => openLightbox(currentIndex + 1));
@@ -453,7 +420,7 @@ const categorie = [
     });
 
     document.addEventListener('keydown', e => {
-      if (!lb.classList.contains('open')) return;
+      if (!lb?.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') openLightbox(currentIndex - 1);
       if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
