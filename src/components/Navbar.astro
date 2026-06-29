@@ -49,6 +49,22 @@ const nav = {
     pm: 'Gestión de proyectos',
     cert: 'Certificaciones',
     lauree: 'Titulaciones',
+  },
+  fr: {
+    chiSono: 'À propos',
+    servizi: 'Services',
+    formazione: 'Formation',
+    galleria: 'Galerie',
+    portfolio: 'Portfolio',
+    contatti: 'Contact',
+    storia: 'Mon histoire',
+    hobby: 'Loisirs et passions',
+    smm: 'Réseaux sociaux',
+    app: 'App & SaaS',
+    privacy: 'Protection des données',
+    pm: 'Gestion de projet',
+    cert: 'Certifications',
+    lauree: 'Diplômes',
   }
 };
 
@@ -101,6 +117,7 @@ const prefix = lang === 'it' ? '' : `/${lang}`;
         <a href="/" class={`lang-btn ${lang === 'it' ? 'active' : ''}`}>IT</a>
         <a href="/en/" class={`lang-btn ${lang === 'en' ? 'active' : ''}`}>EN</a>
         <a href="/es/" class={`lang-btn ${lang === 'es' ? 'active' : ''}`}>ES</a>
+        <a href="/fr/" class={`lang-btn ${lang === 'fr' ? 'active' : ''}`}>FR</a>
       </div>
 
       <a href={`${prefix}/contatti`} class="btn btn-primary nav-cta">{t.contatti}</a>
