@@ -173,7 +173,7 @@ import Layout from '../../layouts/Layout.astro';
           <h2 class="project-title">Magnebevo Staff App</h2>
           <p class="project-sub">App Android per la gestione interna · Flutter · Firebase</p>
           <p class="project-desc">
-            App Android ad uso interno per lo staff del locale. Strumento operativo pensato per semplificare la comunicazione, la gestione delle prenotazioni e l'organizzazione quotidiana del team.
+            App Android ad uso interno per lo staff del locale. Strumento operativo completo per la gestione quotidiana: promozioni attivabili in tempo reale, gestione punti clienti con scansione QR, calendario eventi, lista della spesa condivisa, ricettario drink e cibo, e gestione prenotazioni tavoli.
           </p>
 
           <div class="project-tags">
@@ -183,16 +183,24 @@ import Layout from '../../layouts/Layout.astro';
             <span class="ptag">Android</span>
             <span class="ptag">Uso interno</span>
           </div>
-
-          <div class="project-note">
-            Gli screenshot non sono disponibili pubblicamente per ragioni di privacy operativa del cliente.
-          </div>
         </div>
 
-        <div class="project-placeholder">
-          <div class="placeholder-inner">
-            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="color: var(--blue)"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            <span>Screenshot riservati</span>
+        <div class="app-screens">
+          <div class="screens-wrap">
+            <button class="screen-prev screen-prev-staff" aria-label="Precedente">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="screens-scroll screens-scroll-staff">
+              <img src="/images/portfolio/app_staff_promozioni.jpg" alt="Magnebevo Staff — Promozioni" loading="lazy" class="screen-img screen-img-staff" />
+              <img src="/images/portfolio/app_staff_punti.jpg" alt="Magnebevo Staff — Gestione Punti" loading="lazy" class="screen-img screen-img-staff" />
+              <img src="/images/portfolio/app_staff_eventi.jpg" alt="Magnebevo Staff — Eventi" loading="lazy" class="screen-img screen-img-staff" />
+              <img src="/images/portfolio/app_staff_spesa.jpg" alt="Magnebevo Staff — Lista Spesa" loading="lazy" class="screen-img screen-img-staff" />
+              <img src="/images/portfolio/app_staff_ricettario.jpg" alt="Magnebevo Staff — Ricettario" loading="lazy" class="screen-img screen-img-staff" />
+              <img src="/images/portfolio/app_staff_prenotazioni.jpg" alt="Magnebevo Staff — Prenotazioni" loading="lazy" class="screen-img screen-img-staff" />
+            </div>
+            <button class="screen-next screen-next-staff" aria-label="Successivo">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
           </div>
         </div>
       </div>
@@ -701,7 +709,7 @@ import Layout from '../../layouts/Layout.astro';
       });
     });
 
-    // Carousel
+    // Carousel client app
     const scroll = document.querySelector('.screens-scroll');
     const prev = document.querySelector('.screen-prev');
     const next = document.querySelector('.screen-next');
@@ -710,6 +718,17 @@ import Layout from '../../layouts/Layout.astro';
       const step = 200;
       prev.addEventListener('click', () => scroll.scrollBy({ left: -step, behavior: 'smooth' }));
       next.addEventListener('click', () => scroll.scrollBy({ left: step, behavior: 'smooth' }));
+    }
+
+    // Carousel staff app
+    const scrollStaff = document.querySelector('.screens-scroll-staff');
+    const prevStaff = document.querySelector('.screen-prev-staff');
+    const nextStaff = document.querySelector('.screen-next-staff');
+
+    if (scrollStaff && prevStaff && nextStaff) {
+      const step = 200;
+      prevStaff.addEventListener('click', () => scrollStaff.scrollBy({ left: -step, behavior: 'smooth' }));
+      nextStaff.addEventListener('click', () => scrollStaff.scrollBy({ left: step, behavior: 'smooth' }));
     }
 
     // Lightbox per screenshot app con navigazione
