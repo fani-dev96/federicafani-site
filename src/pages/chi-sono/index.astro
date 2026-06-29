@@ -365,7 +365,17 @@ import Layout from '../../layouts/Layout.astro';
 /* RESPONSIVE */
 @media (max-width: 900px) {
   .about-hero-inner { grid-template-columns: 1fr; }
-  .about-hero-right { display: none; }
+  .about-hero-right {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+  .about-img-wrap {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
   .basi-grid { grid-template-columns: 1fr; }
   .tl-item { grid-template-columns: 1fr; gap: 6px; }
   .tl-year { font-size: 13px; }
