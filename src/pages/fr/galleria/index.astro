@@ -12,7 +12,6 @@ const foto = Object.keys(fotoImport).map(path => {
   const categoria = parts[0].toLowerCase();
   const src = `/foto/${filename}`;
   
-  // Alt text leggibile dal nome file
   const alt = parts.slice(1, -1).join(' ').replace(/-/g, ' ') || filename;
   
   return { src, categoria, alt: `Federica Fanì — ${alt}`, filename };
@@ -21,7 +20,7 @@ const foto = Object.keys(fotoImport).map(path => {
 const categorie = [
   { id: "tutti", label: "Tous" },
   { id: "eventi", label: "Événements" },
-  { id: "locale", label: "Bar" },
+  { id: "locale", label: "Lieu" },
   { id: "concerti", label: "Concerts" },
   { id: "club", label: "Club" },
   { id: "portrait", label: "Portrait" },
@@ -34,7 +33,7 @@ const totalFoto = foto.length;
 <Layout
   lang="fr"
   title="Galerie — Federica Fanì"
-  description="Concerti, club, eventi, locali. Scattate con una Nikon e tanta pazienza per la luce giusta."
+  description="Concerts, clubs, personnes. Photographiés avec un Nikon et beaucoup de patience pour trouver la bonne lumière."
 >
 
   <!-- HERO -->
@@ -42,11 +41,11 @@ const totalFoto = foto.length;
     <div class="gall-hero-inner">
       <div class="hero-eyebrow reveal">
         <span class="eyebrow-line"></span>
-        <span class="eyebrow">Fotografia</span>
+        <span class="eyebrow">Photographie</span>
       </div>
       <h1 class="reveal reveal-delay-1">Galerie</h1>
       <p class="gall-hero-sub reveal reveal-delay-2">
-        Concerts, clubs, personnes. Prises avec un Nikon et beaucoup de patience pour trouver la bonne lumière.
+        Concerts, clubs, personnes. Photographiés avec un Nikon et beaucoup de patience pour trouver la bonne lumière.
       </p>
     </div>
   </section>
@@ -68,7 +67,7 @@ const totalFoto = foto.length;
 
     <!-- CONTATORE -->
     <div class="gall-count reveal reveal-delay-1">
-      <span id="photoCount">{totalFoto}</span> foto
+      <span id="photoCount">{totalFoto}</span> photos
     </div>
 
     <!-- GRIGLIA -->
@@ -80,11 +79,7 @@ const totalFoto = foto.length;
             data-categoria={f.categoria}
             data-index={i}
           >
-            <img
-              src={f.src}
-              alt={f.alt}
-              loading="lazy"
-            />
+            <img src={f.src} alt={f.alt} loading="lazy" />
             <div class="gall-overlay">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
             </div>
@@ -98,7 +93,6 @@ const totalFoto = foto.length;
       </div>
     )}
 
-    <!-- EMPTY STATE per filtri -->
     <div class="gall-empty" id="gallEmpty" style="display:none">
       <div class="empty-ico">📷</div>
       <div class="empty-text">Aucune photo dans cette catégorie pour l'instant.<br>Revenez bientôt !</div>
@@ -127,11 +121,11 @@ const totalFoto = foto.length;
   <div class="section-dark">
     <section class="section cta-section">
       <div class="cta-inner">
-        <span class="eyebrow eyebrow-light reveal">Travaillons ensemble</span>
-        <h2 class="sec-title-light reveal reveal-delay-1">Vous voulez ces photos pour votre activité ?</h2>
-        <p class="cta-sub reveal reveal-delay-2">La photographie est incluse dans les forfaits Standard et Premium, ou disponible en service séparé.</p>
+        <span class="eyebrow eyebrow-light reveal">Collaborons</span>
+        <h2 class="sec-title-light reveal reveal-delay-1">Vous voulez ces photos pour votre business ?</h2>
+        <p class="cta-sub reveal reveal-delay-2">La photographie est incluse dans les forfaits Standard et Premium, ou disponible comme service indépendant.</p>
         <div class="cta-btns reveal reveal-delay-3">
-          <a href="/fr/contatti" class="btn btn-gold">Me contacter</a>
+          <a href="/fr/contatti" class="btn btn-gold">M'écrire</a>
           <a href="/fr/servizi/smm" class="btn btn-outline-light">Voir les forfaits</a>
         </div>
       </div>
@@ -141,218 +135,47 @@ const totalFoto = foto.length;
 </Layout>
 
 <style>
-.gall-hero {
-  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px);
-  background: var(--blue-pale);
-}
-
+.gall-hero { padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px); background: var(--blue-pale); }
 .gall-hero-inner { max-width: 1200px; margin: 0 auto; }
-
-.hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.eyebrow-line {
-  width: 32px;
-  height: 1px;
-  background: var(--blue);
-  flex-shrink: 0;
-}
-
-.gall-hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(40px, 6vw, 72px);
-  font-weight: 300;
-  color: var(--blue-dark);
-  line-height: 1.1;
-  margin-bottom: 16px;
-}
-
-.gall-hero-sub {
-  font-size: 16px;
-  color: var(--blue-mid);
-  font-style: italic;
-  font-family: 'Cormorant Garamond', serif;
-}
-
-.gall-section {
-  padding-top: clamp(32px, 4vw, 56px);
-  padding-bottom: clamp(48px, 6vw, 80px);
-}
-
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 16px;
-}
-
-.filter-btn {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-  padding: 7px 16px;
-  border-radius: 20px;
-  border: 0.5px solid rgba(43,79,216,0.2);
-  color: var(--blue-mid);
-  background: transparent;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
+.hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.eyebrow-line { width: 32px; height: 1px; background: var(--blue); flex-shrink: 0; }
+.gall-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 6vw, 72px); font-weight: 300; color: var(--blue-dark); line-height: 1.1; margin-bottom: 16px; }
+.gall-hero-sub { font-size: 16px; color: var(--blue-mid); font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.gall-section { padding-top: clamp(32px, 4vw, 56px); padding-bottom: clamp(48px, 6vw, 80px); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.filter-btn { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; padding: 7px 16px; border-radius: 20px; border: 0.5px solid rgba(43,79,216,0.2); color: var(--blue-mid); background: transparent; cursor: pointer; transition: all 0.2s ease; }
 .filter-btn:hover { background: var(--blue-light); color: var(--blue); border-color: var(--blue); }
 .filter-btn.active { background: var(--blue); color: var(--white); border-color: var(--blue); }
-
-.gall-count {
-  font-size: 12px;
-  color: var(--blue-mid);
-  margin-bottom: 24px;
-}
-
-.gall-grid {
-  columns: 4;
-  column-gap: 10px;
-}
-
-.gall-item {
-  position: relative;
-  break-inside: avoid;
-  margin-bottom: 10px;
-  border-radius: var(--r-md);
-  overflow: hidden;
-  cursor: pointer;
-}
-
+.gall-count { font-size: 12px; color: var(--blue-mid); margin-bottom: 24px; }
+.gall-grid { columns: 4; column-gap: 10px; }
+.gall-item { position: relative; break-inside: avoid; margin-bottom: 10px; border-radius: var(--r-md); overflow: hidden; cursor: pointer; }
 .gall-item.hidden { display: none; }
-
-.gall-item img {
-  width: 100%;
-  display: block;
-  transition: transform 0.4s ease;
-}
-
+.gall-item img { width: 100%; display: block; transition: transform 0.4s ease; }
 .gall-item:hover img { transform: scale(1.04); }
-
-.gall-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(10,22,40,0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--white);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
+.gall-overlay { position: absolute; inset: 0; background: rgba(10,22,40,0.45); display: flex; align-items: center; justify-content: center; color: var(--white); opacity: 0; transition: opacity 0.2s ease; }
 .gall-item:hover .gall-overlay { opacity: 1; }
-
-.gall-empty {
-  text-align: center;
-  padding: 80px 20px;
-}
-
+.gall-empty { text-align: center; padding: 80px 20px; }
 .empty-ico { font-size: 48px; margin-bottom: 16px; }
 .empty-text { font-size: 15px; color: var(--blue-mid); line-height: 1.7; font-style: italic; font-family: 'Cormorant Garamond', serif; }
-
-.lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(5,10,20,0.95);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-}
-
+.lightbox { position: fixed; inset: 0; background: rgba(5,10,20,0.95); z-index: 1000; display: none; align-items: center; justify-content: center; }
 .lightbox.open { display: flex; }
-
-.lightbox-img-wrap {
-  max-width: 85vw;
-  max-height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.lightbox-img-wrap img {
-  max-width: 100%;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: var(--r-md);
-  display: block;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 0.5px solid rgba(255,255,255,0.2);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  z-index: 10;
-}
-
+.lightbox-img-wrap { max-width: 85vw; max-height: 85vh; display: flex; align-items: center; justify-content: center; }
+.lightbox-img-wrap img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: var(--r-md); display: block; }
+.lightbox-close { position: absolute; top: 20px; right: 20px; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 0.5px solid rgba(255,255,255,0.2); color: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; z-index: 10; }
 .lightbox-close:hover { background: rgba(255,255,255,0.2); }
-
-.lightbox-prev,
-.lightbox-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  border: 0.5px solid rgba(255,255,255,0.2);
-  color: var(--white);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease;
-  z-index: 10;
-}
-
+.lightbox-prev, .lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 0.5px solid rgba(255,255,255,0.2); color: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s ease; z-index: 10; }
 .lightbox-prev { left: 20px; }
 .lightbox-next { right: 20px; }
-.lightbox-prev:hover,
-.lightbox-next:hover { background: rgba(255,255,255,0.2); }
-
-.lightbox-caption {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 12px;
-  color: rgba(255,255,255,0.5);
-  white-space: nowrap;
-}
-
+.lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.2); }
+.lightbox-caption { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 12px; color: rgba(255,255,255,0.5); white-space: nowrap; }
 .cta-section { text-align: center; }
 .cta-section .eyebrow { display: block; margin-bottom: 8px; }
 .cta-section h2 { margin-bottom: 16px; }
 .cta-sub { font-size: 15px; color: var(--azure); max-width: 480px; margin: 0 auto 32px; line-height: 1.75; }
 .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
 @media (max-width: 1024px) { .gall-grid { columns: 3; } }
 @media (max-width: 768px) { .gall-grid { columns: 2; } }
-@media (max-width: 480px) {
-  .gall-grid { columns: 1; }
-  .lightbox-prev { left: 8px; }
-  .lightbox-next { right: 8px; }
-}
+@media (max-width: 480px) { .gall-grid { columns: 1; } .lightbox-prev { left: 8px; } .lightbox-next { right: 8px; } }
 </style>
 
 <script>
@@ -364,16 +187,13 @@ const totalFoto = foto.length;
     const lb = document.getElementById('lightbox');
     const lbImg = document.getElementById('lbImg');
     const lbCaption = document.getElementById('lbCaption');
-
     let currentIndex = 0;
     let visibleItems = [...items];
-
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const filter = btn.dataset.filter;
-
         visibleItems = [];
         items.forEach(item => {
           const cat = item.dataset.categoria;
@@ -381,19 +201,16 @@ const totalFoto = foto.length;
           item.classList.toggle('hidden', !show);
           if (show) visibleItems.push(item);
         });
-
         if (countEl) countEl.textContent = String(visibleItems.length);
         if (emptyEl) emptyEl.style.display = visibleItems.length === 0 ? 'block' : 'none';
       });
     });
-
     document.addEventListener('click', e => {
       const item = e.target.closest('.gall-item');
       if (!item) return;
       currentIndex = visibleItems.indexOf(item);
       openLightbox(currentIndex);
     });
-
     function openLightbox(idx) {
       if (idx < 0 || idx >= visibleItems.length) return;
       currentIndex = idx;
@@ -406,20 +223,14 @@ const totalFoto = foto.length;
       lb?.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function closeLightbox() {
       lb?.classList.remove('open');
       document.body.style.overflow = '';
     }
-
     document.getElementById('lbClose')?.addEventListener('click', closeLightbox);
     document.getElementById('lbPrev')?.addEventListener('click', () => openLightbox(currentIndex - 1));
     document.getElementById('lbNext')?.addEventListener('click', () => openLightbox(currentIndex + 1));
-
-    lb?.addEventListener('click', e => {
-      if (e.target === lb) closeLightbox();
-    });
-
+    lb?.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
     document.addEventListener('keydown', e => {
       if (!lb?.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
