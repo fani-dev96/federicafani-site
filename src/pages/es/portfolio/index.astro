@@ -227,10 +227,7 @@ import Layout from '../../../layouts/Layout.astro';
 </Layout>
 
 <style>
-.port-hero {
-  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px);
-  background: var(--blue-pale);
-}
+.port-hero { padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 80px) clamp(32px, 4vw, 56px); background: var(--blue-pale); }
 .port-hero-inner { max-width: 1200px; margin: 0 auto; }
 .hero-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
 .eyebrow-line { width: 32px; height: 1px; background: var(--blue); flex-shrink: 0; }
@@ -271,7 +268,7 @@ import Layout from '../../../layouts/Layout.astro';
 .screens-wrap { position: relative; display: flex; align-items: center; gap: 8px; }
 .screens-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-behavior: smooth; scrollbar-width: none; flex: 1; }
 .screens-scroll::-webkit-scrollbar { display: none; }
-.screen-img { height: 380px; width: auto; border-radius: var(--r-md); border: 0.5px solid rgba(43,79,216,0.1); flex-shrink: 0; transition: transform 0.2s ease; }
+.screen-img { height: 380px; width: auto; border-radius: var(--r-md); border: 0.5px solid rgba(43,79,216,0.1); flex-shrink: 0; cursor: zoom-in; transition: transform 0.2s ease; }
 .screen-img:hover { transform: scale(1.02); }
 .screen-prev, .screen-next { width: 36px; height: 36px; border-radius: 50%; background: var(--white); border: 0.5px solid rgba(43,79,216,0.2); color: var(--blue); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(43,79,216,0.1); }
 .screen-prev:hover, .screen-next:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
@@ -342,7 +339,7 @@ import Layout from '../../../layouts/Layout.astro';
     const lb = document.getElementById('screenLightbox');
     const lbImg = document.getElementById('screenLbImg');
     const lbCaption = document.getElementById('screenLbCaption');
-    let screenImages = [];
+    let screenImages = Array.from(document.querySelectorAll('.screen-img'));
     let currentScreenIndex = 0;
     function openScreenLightbox(idx) {
       if (idx < 0 || idx >= screenImages.length) return;
@@ -359,6 +356,10 @@ import Layout from '../../../layouts/Layout.astro';
       lb?.classList.remove('open');
       document.body.style.overflow = '';
     }
+    screenImages.forEach((img, idx) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openScreenLightbox(idx));
+    });
     const anniversarioWrap = document.querySelector('.smm-featured');
     const anniversarioImg = document.querySelector('.smm-featured img');
     if (anniversarioWrap && anniversarioImg) {

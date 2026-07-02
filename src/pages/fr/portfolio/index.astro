@@ -149,7 +149,7 @@ import Layout from '../../../layouts/Layout.astro';
           <h2 class="project-title">Magnebevo Staff App</h2>
           <p class="project-sub">App Android pour la gestion interne · Flutter · Firebase</p>
           <p class="project-desc">
-            App Android à usage interne pour le staff du bar. Outil opérationnel complet pour la gestion quotidienne : promotions activables en temps réel, gestion des points clients avec scan QR, calendrier d'événements, liste de courses partagée, recettario de boissons et nourriture, et gestion des réservations de tables.
+            App Android à usage interne pour le staff du bar. Outil opérationnel complet pour la gestion quotidienne : promotions activables en temps réel, gestion des points clients avec scan QR, calendrier d'événements, liste de courses partagée, recettes de boissons et nourriture, et gestion des réservations de tables.
           </p>
           <div class="project-tags">
             <span class="ptag">Flutter</span>
@@ -268,7 +268,7 @@ import Layout from '../../../layouts/Layout.astro';
 .screens-wrap { position: relative; display: flex; align-items: center; gap: 8px; }
 .screens-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scroll-behavior: smooth; scrollbar-width: none; flex: 1; }
 .screens-scroll::-webkit-scrollbar { display: none; }
-.screen-img { height: 380px; width: auto; border-radius: var(--r-md); border: 0.5px solid rgba(43,79,216,0.1); flex-shrink: 0; transition: transform 0.2s ease; }
+.screen-img { height: 380px; width: auto; border-radius: var(--r-md); border: 0.5px solid rgba(43,79,216,0.1); flex-shrink: 0; cursor: zoom-in; transition: transform 0.2s ease; }
 .screen-img:hover { transform: scale(1.02); }
 .screen-prev, .screen-next { width: 36px; height: 36px; border-radius: 50%; background: var(--white); border: 0.5px solid rgba(43,79,216,0.2); color: var(--blue); display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0; transition: all 0.2s ease; box-shadow: 0 2px 8px rgba(43,79,216,0.1); }
 .screen-prev:hover, .screen-next:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
@@ -339,11 +339,27 @@ import Layout from '../../../layouts/Layout.astro';
     const lb = document.getElementById('screenLightbox');
     const lbImg = document.getElementById('screenLbImg');
     const lbCaption = document.getElementById('screenLbCaption');
+    let screenImages = Array.from(document.querySelectorAll('.screen-img'));
     let currentScreenIndex = 0;
+    function openScreenLightbox(idx) {
+      if (idx < 0 || idx >= screenImages.length) return;
+      currentScreenIndex = idx;
+      const img = screenImages[idx];
+      if (!lbImg) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      if (lbCaption) lbCaption.textContent = `${idx + 1} / ${screenImages.length}`;
+      lb?.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
     function closeScreenLightbox() {
       lb?.classList.remove('open');
       document.body.style.overflow = '';
     }
+    screenImages.forEach((img, idx) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openScreenLightbox(idx));
+    });
     const anniversarioWrap = document.querySelector('.smm-featured');
     const anniversarioImg = document.querySelector('.smm-featured img');
     if (anniversarioWrap && anniversarioImg) {
@@ -356,11 +372,15 @@ import Layout from '../../../layouts/Layout.astro';
         document.body.style.overflow = 'hidden';
       });
     }
+    document.getElementById('screenLbPrev')?.addEventListener('click', e => { e.stopPropagation(); openScreenLightbox(currentScreenIndex - 1); });
+    document.getElementById('screenLbNext')?.addEventListener('click', e => { e.stopPropagation(); openScreenLightbox(currentScreenIndex + 1); });
     document.getElementById('screenLbClose')?.addEventListener('click', closeScreenLightbox);
     lb?.addEventListener('click', e => { if (e.target === lb) closeScreenLightbox(); });
     document.addEventListener('keydown', e => {
       if (!lb?.classList.contains('open')) return;
       if (e.key === 'Escape') closeScreenLightbox();
+      if (e.key === 'ArrowLeft') openScreenLightbox(currentScreenIndex - 1);
+      if (e.key === 'ArrowRight') openScreenLightbox(currentScreenIndex + 1);
     });
   });
 </script>
